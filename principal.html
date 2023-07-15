@@ -1,14 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principal</title>
-
-
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="PasarelaPago.css">
+  <title></title>
 </head>
 <body>
-    
+  <div class="crypto-section">
+    <div class="crypto-form-container">
+      <div class="crypto-form">
+        <div class="input-wrapper">
+          <label for="fiat-amount">Cantidad</label>
+          <input type="text" id="fiat-amount" placeholder="0.00">
+        </div>
+        <div class="input-wrapper">
+          <label for="crypto-select">Criptomoneda</label>
+          <select id="crypto-select">
+            <option value="btc">Bitcoin (BTC)</option>
+            <option value="eth">Ethereum (ETH)</option>
+            <!-- Agrega más opciones según tus necesidades -->
+          </select>
+        </div>
+        <div class="payment-options">
+          <h4>Elige un metodo de  pago:</h4>
+          <div class="payment-method">
+            <input type="radio" id="credit-card" name="payment-method" checked>
+            <label for="credit-card">Tarjeta de crédito</label>
+          </div>
+          <div class="payment-method">
+            <input type="radio" id="bank-transfer" name="payment-method">
+            <label for="bank-transfer">Transferencia bancaria</label>
+          </div>
+        </div>
+        <button class="buy-button">Comprar</button>
+      </div>
+    </div>
+    <div class="crypto-icons-container">
+      <div class="crypto-icons">
+        <div class="icon">
+          <img src="img/visaFoto.svg" alt="Icono 1">
+          <p>Realiza tu pago atravez de Visa</p>
+        </div>
+      
+        
+
+        <div class="icon">
+          <img src="img/mastercard.svg" alt="Icono 2">
+          <p>Realiza tu pago atravez de Master Card</p>
+        </div>
+      
+
+        <div class="icon">
+          <img src="img/PayPal.svg" alt="Icono 3">
+          <p>Realiza tu pago atravez de Paypal.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="footer-container">
+
+    </div>
+  </footer>
 </body>
 </html>
