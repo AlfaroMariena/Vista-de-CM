@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="prueba.css">
+  <title>Calculadora de Monedas Electrónicas</title>
+</head>
+<body>
+  <h1>Calculadora de Monedas Electrónicas</h1>
+  <form>
+    <label for="dollars">Ingrese el monto en dólares:</label>
+    <input type="number" id="dollars" step="0.01" required>
+    <label for="crypto">Seleccione una moneda electrónica:</label>
+    <select id="crypto">
+      <option value="bitcoin">Bitcoin (BTC)</option>
+      <option value="ethereum">Ethereum (ETH)</option>
+      <option value="litecoin">Litecoin (LTC)</option>
+      <!-- Agrega más opciones aquí -->
+    </select>
+    <button type="button" onclick="convertToCrypto()">Convertir</button>
+  </form>
+  <p id="result"></p>
+  
+    <h1>Opciones de Pago</h1>
+    <div class="payment-buttons">
+      <button class="visa">Pagar con Visa</button>
+      <button class="mastercard">Pagar con Mastercard</button>
+      <button class="paypal">Pagar con PayPal</button>
+    </div>
+  
+  
+  <script>
+    async function convertToCrypto() {
+      const dollarAmount = parseFloat(document.getElementById('dollars').value);
+      const selectedCrypto = document.getElementById('crypto').value;
+
+      if (!isNaN(dollarAmount) && dollarAmount > 0) {
+        try {
+          const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=${selectedCrypto}`);
+          const data = await response.json();
+          const cryptoAmount = dollarAmount / data.usd[selectedCrypto.toLowerCase()];
+          document.getElementById('result').innerText = `${dollarAmount.toFixed(2)} dólares son aproximadamente ${cryptoAmount.toFixed(6)} ${selectedCrypto.toUpperCase()}.`;
+        } catch (error) {
+          document.getElementById('result').innerText = 'Error al obtener la tasa de cambio. Por favor, inténtelo nuevamente más tarde.';
+        }
+      } else {
+        document.getElementById('result').innerText = 'Por favor, ingrese un monto válido en dólares.';
+      }
+    }
+  </script>
+</body>
+</html>
+
