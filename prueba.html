@@ -24,31 +24,43 @@
   
     <h1>Opciones de Pago</h1>
     <div class="payment-buttons">
-      <button class="visa">Pagar con Visa</button>
+      <button class="visa" >Pagar con Visa</button>
       <button class="mastercard">Pagar con Mastercard</button>
       <button class="paypal">Pagar con PayPal</button>
     </div>
   
   
-  <script>
-    async function convertToCrypto() {
-      const dollarAmount = parseFloat(document.getElementById('dollars').value);
-      const selectedCrypto = document.getElementById('crypto').value;
-
-      if (!isNaN(dollarAmount) && dollarAmount > 0) {
-        try {
-          const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=${selectedCrypto}`);
-          const data = await response.json();
-          const cryptoAmount = dollarAmount / data.usd[selectedCrypto.toLowerCase()];
-          document.getElementById('result').innerText = `${dollarAmount.toFixed(2)} dólares son aproximadamente ${cryptoAmount.toFixed(6)} ${selectedCrypto.toUpperCase()}.`;
-        } catch (error) {
-          document.getElementById('result').innerText = 'Error al obtener la tasa de cambio. Por favor, inténtelo nuevamente más tarde.';
+    <script>
+        function convertToCrypto() {
+          const dollarAmount = parseFloat(document.getElementById('dollars').value);
+          const selectedCrypto = document.getElementById('crypto').value;
+          let exchangeRate;
+    
+          // Tasas de cambio fijas para cada moneda (ejemplo)
+          switch (selectedCrypto) {
+            case 'bitcoin':
+              exchangeRate = 30000; // 1 dólar = 30000 bitcoins (solo como ejemplo)
+              break;
+            case 'ethereum':
+              exchangeRate = 2000; // 1 dólar = 2000 ethers (solo como ejemplo)
+              break;
+            case 'litecoin':
+              exchangeRate = 150; // 1 dólar = 150 litecoins (solo como ejemplo)
+              break;
+            // Agrega más casos para otras monedas electrónicas
+            default:
+              exchangeRate = 1; // Si no se selecciona una moneda válida, la tasa es 1:1 (dólar a dólar)
+              break;
+          }
+    
+          if (!isNaN(dollarAmount) && dollarAmount > 0) {
+            const cryptoAmount = dollarAmount / exchangeRate;
+            document.getElementById('result').innerText = `${dollarAmount.toFixed(2)} dólares son aproximadamente ${cryptoAmount.toFixed(6)} ${selectedCrypto.toUpperCase()}.`;
+          } else {
+            document.getElementById('result').innerText = 'Por favor, ingrese un monto válido en dólares.';
+          }
         }
-      } else {
-        document.getElementById('result').innerText = 'Por favor, ingrese un monto válido en dólares.';
-      }
-    }
-  </script>
+      </script>
 </body>
 </html>
-
+ 
